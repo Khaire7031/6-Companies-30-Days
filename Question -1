@@ -1,0 +1,29 @@
+import java.util.Stack;
+import java.util.*;
+class Solution {
+    public int evalRPN(String[] tokens) {
+        // Pranav Deepak Khaire
+        Stack<Integer> stack=new Stack();
+        String oprtr="+-*/";
+        for(String s:tokens)
+        {
+            if(oprtr.contains(s)&&!stack.isEmpty()){
+              int num1=stack.pop();
+              int num2=stack.pop();
+              int answer=help(num2,s,num1);
+              stack.push(answer);
+            }else{
+                stack.push(Integer.parseInt(s));
+            }
+        }
+        return stack.pop();
+
+    }
+    public int help(int num,String s,int num1)
+    {
+        if(s.equals("+"))return num+num1;
+        else if(s.equals("-"))return num-num1;
+        else if(s.equals("/"))return num/num1;
+        return num*num1;
+    }
+}
